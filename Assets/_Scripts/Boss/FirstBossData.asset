@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d09bb3cbbf015244a9ff524e90f3342b, type: 3}
+  m_Name: FirstBossData
+  m_EditorClassIdentifier: Assembly-CSharp::BossData
+  bossHp: 500
+  bossMovespeed: 2
+  attackDistance: 1.2
+  damageAmount: 1
+  attackRate: 1.5
+  bossDashMaxRange: 10
+  bossDashSpeed: 10
+  bossDashDamage: 1
+  bossDashWindup: 2
+  bossDashCooldown: 10
+  bossDashEndPointDamage: 30
+  bossDashHitRadius: 2
+  bossDashEndPause: 1
+  bossMinDashRange: 4
+  bossCleaveCooldown: 5
+  bossCleaveCastTime: 2
+  bossCleaveDamage: 2
+  bossCleaveAngle: 60
+  bossCleaveDistance: 10

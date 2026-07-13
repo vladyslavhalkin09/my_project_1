@@ -1,0 +1,43 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Scripts/UI/GameHUD.uss?fileID=7433441132597879392&amp;guid=50749728ee8ae134ba0d3648f464314f&amp;type=3#GameHUD"/>
+    <ui:VisualElement name="root" class="root">
+        <ui:VisualElement name="inventory-container" class="inventory-container">
+            <ui:Label text="Inventory" class="inventory-title"/>
+            <ui:VisualElement name="inventory-grid" class="inventory-grid"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="bottom-panel" class="bottom-panel">
+            <ui:VisualElement name="cast-bar-container" class="cast-bar-container">
+                <ui:VisualElement name="cast-bar-fill" class="cast-bar-fill"/>
+                <ui:Label name="cast-bar-label" text="" class="cast-bar-label"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="bars-container" class="bars-container">
+                <ui:VisualElement name="hp-bar-container" class="hp-bar-container">
+                    <ui:VisualElement name="hp-bar-fill" class="hp-bar-fill"/>
+                    <ui:Label name="hp-text" text="100/100" class="hp-text"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="mana-bar-container" class="mana-bar-container">
+                    <ui:VisualElement name="mana-bar-fill" class="mana-bar-fill"/>
+                    <ui:Label name="mana-text" text="50/50" class="mana-text"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="abilities-container" class="abilities-container">
+                <ui:VisualElement name="ability-1" class="ability-slot">
+                    <ui:VisualElement name="ability-1-overlay" class="ability-overlay"/>
+                    <ui:Label text="1" class="ability-key"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="ability-2" class="ability-slot">
+                    <ui:VisualElement name="ability-2-overlay" class="ability-overlay"/>
+                    <ui:Label text="2" class="ability-key"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="ability-3" class="ability-slot">
+                    <ui:VisualElement name="ability-3-overlay" class="ability-overlay"/>
+                    <ui:Label text="3" class="ability-key"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="ability-4" class="ability-slot">
+                    <ui:VisualElement name="ability-4-overlay" class="ability-overlay"/>
+                    <ui:Label text="4" class="ability-key"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
