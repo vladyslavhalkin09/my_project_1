@@ -6,16 +6,18 @@ using System;
 
 public class Health : Resource
 {
-    // public float hp = 100f;
-    // public float maxHp = 100f;
     public TextMeshProUGUI healthtext;
     public GameObject gameOverScreen;
     public static event Action<GameObject> OnEnemyDied;
-    // public event Action<float> OnHealthChanged;
+    public CharacterStatsHolder _stats;
 
     void Start()
     {
         UpdateUi();
+        _stats = GetComponent<CharacterStatsHolder>();
+        _stats.Stats.OnStatsChanged += HandleStatsChanged;
+        HandleStatsChanged();
+
     }
     void Update()
     {
@@ -82,5 +84,13 @@ public class Health : Resource
     public void InstantKill()
     {
         TakeDamage(currentValue);
+    }
+    private void HandleStatsChanged()
+    {
+        SetMaxValue(_stats.Stats.GetStat(StatType.Health));
+    }
+    void OnDestroy()
+    {
+        _stats.Stats.OnStatsChanged -= HandleStatsChanged;
     }
 }

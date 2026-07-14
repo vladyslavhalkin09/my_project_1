@@ -28,4 +28,14 @@ public class Resource : MonoBehaviour
     {
         OnResourceChanged?.Invoke(currentValue / maxValue);
     }
+
+    public virtual void SetMaxValue(float newMax)
+    {
+        maxValue = newMax;
+        if (currentValue > maxValue)
+        {
+            currentValue = maxValue;
+        }
+        UpdateUi();
+    }
 }
