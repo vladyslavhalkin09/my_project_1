@@ -31,7 +31,9 @@ public class Resource : MonoBehaviour
 
     public virtual void SetMaxValue(float newMax)
     {
+        float diff = newMax - maxValue;
         maxValue = newMax;
+        currentValue += diff;
         if (currentValue > maxValue)
         {
             currentValue = maxValue;

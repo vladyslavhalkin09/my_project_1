@@ -1299,6 +1299,8 @@ GameObject:
   - component: {fileID: 461412986}
   - component: {fileID: 461412987}
   - component: {fileID: 461412988}
+  - component: {fileID: 461412989}
+  - component: {fileID: 461412990}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -1451,6 +1453,7 @@ MonoBehaviour:
   maxValue: 100
   healthtext: {fileID: 1552514433}
   gameOverScreen: {fileID: 859648390}
+  _stats: {fileID: 0}
 --- !u!114 &461412980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1619,6 +1622,7 @@ MonoBehaviour:
   currentValue: 50
   maxValue: 50
   regenPerSecond: 1
+  _stats: {fileID: 0}
 --- !u!114 &461412988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1638,6 +1642,36 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 584
+--- !u!114 &461412989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461412972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c896fa4ffba5aed45a419009192e783b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerEquipment
+  testitem: {fileID: 11400000, guid: 8d962e517fc938843a1710879b32f2ff, type: 2}
+--- !u!114 &461412990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461412972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f58a64b3ce001e4e9be4f83263c4901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterStatsHolder
+  stats:
+    baseHealth: 50
+    baseMainStat: 20
+    baseIntelligence: 50
+    baseArmor: 1
 --- !u!1 &480682547
 GameObject:
   m_ObjectHideFlags: 0
@@ -4624,6 +4658,7 @@ MonoBehaviour:
   maxValue: 0
   healthtext: {fileID: 0}
   gameOverScreen: {fileID: 0}
+  _stats: {fileID: 0}
   damagetextprefab: {fileID: 2994032534402285426, guid: 6887e761b52d89144baf90ea55a2aab9, type: 3}
   damageTextHeight: 1
 --- !u!1 &922238277

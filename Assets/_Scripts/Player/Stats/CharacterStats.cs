@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
@@ -15,7 +16,6 @@ public class CharacterStats
 
     public event Action OnStatsChanged;
 
-    // TODO: GetStat(StatType type) — база + сума модифікаторів цього типу
     public float GetStat(StatType type)
     {
         float baseValue = type switch
@@ -27,6 +27,7 @@ public class CharacterStats
             _ => 0f
         };
         float bonus = 0f;
+
         foreach (var modifier in modifiers)
         {
             if (modifier.AffectedStat == type)
@@ -37,7 +38,19 @@ public class CharacterStats
         return baseValue + bonus;
     }
 
-    // TODO: AddModifier(IStatModifier mod) — додати в список + викликати recalculate + OnStatsChanged
+    public void AddModifier(IStatModifier modifier)
+    {
+        modifiers.Add(modifier);
+        OnStatsChanged?.Invoke();
+    }
 
-    // TODO: RemoveModifier(IStatModifier mod) — видалити + recalculate + OnStatsChanged
+
+    public void RemoveModifier(IStatModifier modifier)
+    {
+
+        if (modifiers.Remove(modifier))
+        {
+            OnStatsChanged?.Invoke();
+        }
+    }
 }
