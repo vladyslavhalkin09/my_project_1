@@ -5,18 +5,9 @@ public class PlayerEquipment : MonoBehaviour
 {
     private CharacterStatsHolder _stats;
     private Dictionary<EquipmentSlot, ItemData> equippedItems = new Dictionary<EquipmentSlot, ItemData>();
-
-    public ItemData testitem;
     void Start()
     {
         _stats = GetComponent<CharacterStatsHolder>();
-    }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Equip(testitem);
-        }
     }
     public ItemData Equip(ItemData item)
     {

@@ -3,15 +3,18 @@ using UnityEngine;
 public class AutoAttack : MonoBehaviour
 {
     public float damage;
+    [SerializeField] private float mainStatDamageMultiplier = 1f;
     public float baseCooldown;
     public GameObject bulletPrefab;
     public Transform attackPoint;
     public IAttackModifier[] _modifiers;
     private float _cooldownTimer;
     public LayerMask groundLayer;
+    private CharacterStatsHolder _stats;
     public void Awake()
     {
         _modifiers = GetComponents<IAttackModifier>();
+        _stats = GetComponent<CharacterStatsHolder>();
     }
     public void Update()
     {
@@ -27,6 +30,7 @@ public class AutoAttack : MonoBehaviour
     }
     void Shoot(Vector3 targetPoint)
     {
+
         float distanceToPoint = Vector3.Distance(attackPoint.position, targetPoint);
         if (Physics.Linecast(attackPoint.position, targetPoint, out RaycastHit wallHit, groundLayer))
         {
@@ -40,7 +44,13 @@ public class AutoAttack : MonoBehaviour
         {
             bulletScript.bullethitpoint = targetPoint;
             bulletScript.maxDistance = distanceToPoint;
-            bulletScript.bulletdamage = damage;
+            float finalDamage = damage;
+            if (_stats != null)
+            {
+                finalDamage += _stats.Stats.GetStat(StatType.MainStat) * mainStatDamageMultiplier;
+
+            }
+            bulletScript.bulletdamage = finalDamage;
             foreach (var modifier in _modifiers)
             {
                 modifier.Apply(bulletScript);

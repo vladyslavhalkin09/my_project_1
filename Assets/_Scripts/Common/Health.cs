@@ -34,8 +34,13 @@ public class Health : Resource
     }
     public virtual void TakeDamage(float dmg, DamageType type = DamageType.Normal)
     {
-        Debug.Log(gameObject.name + "get hit" + dmg);
-        base.Spend(dmg);
+        float armor = _stats.Stats.GetStat(StatType.Armor);
+        // 1st formula
+        float finalDamage = Mathf.Max(dmg - armor, 1f);
+        // 2nd formula (wow)
+        // float finalDamage = dmg * (100/(100f + armor));
+        base.Spend(finalDamage);
+        Debug.Log(gameObject.name + "get hit" + finalDamage);
         Debug.Log("hp left " + gameObject.name + ":" + currentValue);
 
         if (currentValue <= 0)

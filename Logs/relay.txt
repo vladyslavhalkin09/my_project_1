@@ -1893,3 +1893,20 @@
 [2026-07-18T20:23:39.938Z] [INFO] log Shutdown request received from client editor-21144-lqmz0t
 [2026-07-18T20:23:39.942Z] [INFO] log Unity client requested immediate shutdown - shutting down now, reason: Shutdown requested by client
 [2026-07-18T20:23:39.948Z] [INFO] log Shutdown: Initiating graceful shutdown: Shutdown requested by client
+[2026-07-24T18:49:50.891Z] [INFO] relay.startup port=9001 mcpClientPort=9002 editorPid=5520
+[2026-07-24T18:49:50.899Z] [INFO] log === RELAY SERVER STARTED === (unity-ai-relay v1.0.12-build.96)
+[2026-07-24T18:49:50.899Z] [INFO] log Starting relay server...
+[2026-07-24T18:49:50.900Z] [INFO] log Command line arguments: ["bun","B:/~BUN/root/relay_win.exe","--relay","--port","9001","--mcp-client-port","9002","--editor-pid","5520","--shutdown-delay","180","--log-dir","C:\\Users\\MSI_GF63\\Desktop\\UnityProject\\Train\\3d_3preson_\\Logs"]
+[2026-07-24T18:49:50.900Z] [INFO] log Parsed config: {"port":9001,"mcpClientPort":9002,"editorPid":"5520","shutdownDelaySeconds":180}
+[2026-07-24T18:49:50.903Z] [INFO] log Initializing relay components...
+[2026-07-24T18:49:50.908Z] [INFO] log Creating RelayEditor...
+[2026-07-24T18:49:50.966Z] [INFO] log WebSocket server started
+[2026-07-24T18:49:50.966Z] [INFO] log Relay server initialization completed
+[2026-07-24T18:49:50.967Z] [INFO] log MCP Client initialized at port: 9002
+[2026-07-24T18:49:50.998Z] [WARN] log [shell-env] Shell environment did not contain a PATH variable
+[2026-07-24T18:49:51.025Z] [INFO] log Unity MCP Relay server started | Port: 9002 | Endpoints: /mcp/start-server, /mcp/stop-server, /mcp/server-status, /mcp/call-tool
+[2026-07-24T18:49:51.522Z] [INFO] log Unity client connected with ID: editor-5520-3e7024 (relay 1.0.12-build.96)
+[2026-07-24T18:49:51.523Z] [INFO] connection.established clientId=editor-5520-3e7024 port=9001
+[2026-07-24T18:49:58.519Z] [INFO] log Shutdown request received from client editor-5520-3e7024
+[2026-07-24T18:49:58.520Z] [INFO] log Unity client requested immediate shutdown - shutting down now, reason: Shutdown requested by client
+[2026-07-24T18:49:58.521Z] [INFO] log Shutdown: Initiating graceful shutdown: Shutdown requested by client

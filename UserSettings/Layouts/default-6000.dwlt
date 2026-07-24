@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 112}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 67
+  controlID: 146
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 68
+  controlID: 69
   draggingID: 0
 --- !u!114 &11
 MonoBehaviour:
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 56}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 69
+  controlID: 70
   draggingID: 0
 --- !u!114 &12
 MonoBehaviour:
@@ -690,7 +690,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/_Scripts/Items_Loot
+    - Assets
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -700,26 +700,26 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/_Scripts/Items_Loot
+  - Assets
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\MSI_GF63\Desktop\UnityProject\Train\3d_3preson_
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 246.00073}
+    scrollPos: {x: 0, y: 79}
     m_SelectedIDs:
-    - m_Data: 66172
+    - m_Data: 61122
     m_LastClickedID:
-      m_Data: 66172
+      m_Data: 61122
     m_ExpandedIDs:
     - m_Data: 0
     - m_Data: 61122
-    - m_Data: 66164
-    - m_Data: 66166
-    - m_Data: 66168
-    - m_Data: 66170
-    - m_Data: 66172
+    - m_Data: 66178
+    - m_Data: 66180
+    - m_Data: 66182
+    - m_Data: 66184
+    - m_Data: 66186
     - m_Data: 1000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -754,11 +754,11 @@ MonoBehaviour:
     m_ExpandedIDs:
     - m_Data: 0
     - m_Data: 61122
-    - m_Data: 66164
-    - m_Data: 66166
-    - m_Data: 66168
-    - m_Data: 66170
-    - m_Data: 66172
+    - m_Data: 66178
+    - m_Data: 66180
+    - m_Data: 66182
+    - m_Data: 66184
+    - m_Data: 66186
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -786,9 +786,9 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
     m_SelectedInstanceIDs:
-    - m_Data: 64966
-    m_LastClickedInstanceID: 64966
-    m_HadKeyboardFocusLastEvent: 1
+    - m_Data: 62640
+    m_LastClickedInstanceID: 62640
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs:
     - m_Data: 58592
     - m_Data: 43446
@@ -828,7 +828,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 16.200012}
     m_GridSize: 16
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 215
@@ -925,11 +925,11 @@ MonoBehaviour:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs:
-      - m_Data: 64966
+      - m_Data: 62640
       m_LastClickedID:
-        m_Data: 64966
+        m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -1312
+      - m_Data: -1326
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1572,7 +1572,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.45872468, y: -0.09763982, z: 0.050328076, w: 0.88228846}
     speed: 2
-    m_Value: {x: 0.45851207, y: -0.09759457, z: 0.050304748, w: 0.8818795}
+    m_Value: {x: -0.45872468, y: 0.09763982, z: -0.050328076, w: -0.88228846}
   m_Size:
     m_Target: 0.8660254
     speed: 2
