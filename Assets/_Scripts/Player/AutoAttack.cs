@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class AutoAttack : MonoBehaviour
 {
-    public float damage;
-    [SerializeField] private float mainStatDamageMultiplier = 1f;
     public float baseCooldown;
     public GameObject bulletPrefab;
     public Transform attackPoint;
@@ -11,10 +9,14 @@ public class AutoAttack : MonoBehaviour
     private float _cooldownTimer;
     public LayerMask groundLayer;
     private CharacterStatsHolder _stats;
+    private PlayerEquipment _equipment;
+    private WeaponDamageCalculator _calculator;
     public void Awake()
     {
         _modifiers = GetComponents<IAttackModifier>();
         _stats = GetComponent<CharacterStatsHolder>();
+        _equipment = GetComponent<PlayerEquipment>();
+        _calculator = GetComponent<WeaponDamageCalculator>();
     }
     public void Update()
     {
@@ -44,17 +46,32 @@ public class AutoAttack : MonoBehaviour
         {
             bulletScript.bullethitpoint = targetPoint;
             bulletScript.maxDistance = distanceToPoint;
-            float finalDamage = damage;
-            if (_stats != null)
-            {
-                finalDamage += _stats.Stats.GetStat(StatType.MainStat) * mainStatDamageMultiplier;
-
-            }
-            bulletScript.bulletdamage = finalDamage;
+            bulletScript.bulletdamage = _calculator.GetAutoAttackDamage();
             foreach (var modifier in _modifiers)
             {
                 modifier.Apply(bulletScript);
             }
+        }
+    }
+    private void OnEnable()
+    {
+        if (_equipment != null)
+        {
+            _equipment.OnEquipmentChanged += HandleEquipmentChanged;
+        }
+    }
+    private void OnDestroy()
+    {
+        if (_equipment != null)
+        {
+            _equipment.OnEquipmentChanged -= HandleEquipmentChanged;
+        }
+    }
+    private void HandleEquipmentChanged(EquipmentSlot slot)
+    {
+        if (slot == EquipmentSlot.Weapon)
+        {
+            RefreshModifiers();
         }
     }
     void RefreshModifiers()

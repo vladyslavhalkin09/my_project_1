@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6517fea0a74b348911700015d85b2c, type: 3}
+  m_Name: TestWpn1
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponData
+  ItemName: 
+  isUsable: 0
+  isEquppable: 0
+  slot: 0
+  statModifiers:
+  - affectedStat: 1
+    value: 5
+  - affectedStat: 0
+    value: 5
+  minDamage: 3
+  maxDamage: 6
+  statsMultiplier: 1

@@ -16,6 +16,15 @@ public class CharacterStats
 
     public event Action OnStatsChanged;
 
+    public void InitializeBaseStats(float health, float mainStat, float intelligence, float armor)
+    {
+        baseHealth = health;
+        baseMainStat = mainStat;
+        baseIntelligence = intelligence;
+        baseArmor = armor;
+        OnStatsChanged?.Invoke();
+    }
+
     public float GetStat(StatType type)
     {
         float baseValue = type switch

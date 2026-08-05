@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 6385740924008147476}
   - component: {fileID: 7551430661831711153}
   - component: {fileID: -8580425749834349715}
+  - component: {fileID: 778578833140762853}
   m_Layer: 3
   m_Name: Enemy_for_spawn
   m_TagString: Enemy
@@ -266,6 +267,7 @@ MonoBehaviour:
   maxValue: 150
   healthtext: {fileID: 0}
   gameOverScreen: {fileID: 0}
+  _stats: {fileID: 0}
   damagetextprefab: {fileID: 2994032534402285426, guid: 6887e761b52d89144baf90ea55a2aab9, type: 3}
   damageTextHeight: 1
 --- !u!114 &7551430661831711153
@@ -312,6 +314,23 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &778578833140762853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480269625173837204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f58a64b3ce001e4e9be4f83263c4901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterStatsHolder
+  stats:
+    baseHealth: 150
+    baseMainStat: 0
+    baseIntelligence: 0
+    baseArmor: 0
 --- !u!1 &4214391089673042315
 GameObject:
   m_ObjectHideFlags: 0

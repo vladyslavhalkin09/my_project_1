@@ -9,4 +9,5 @@ public class EnemyData : ScriptableObject
     public float enemyspeed = 2f;
     [Header("Patrol")]
     public float patrolSpeed;
+    public float enemyArmor;
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3421080231975674623}
   - component: {fileID: 5476836456980511042}
   - component: {fileID: 633918082910431327}
+  - component: {fileID: 3666992412083676968}
   m_Layer: 0
   m_Name: EnemyTrap
   m_TagString: Enemy
@@ -141,8 +142,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08ee521d8afe1144da2dfcd05dd8976e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  hp: 10
-  maxHp: 10
+  currentValue: 0
+  maxValue: 0
   healthtext: {fileID: 0}
   gameOverScreen: {fileID: 0}
+  _stats: {fileID: 0}
   damagetextprefab: {fileID: 0}
+  damageTextHeight: 1
+--- !u!114 &3666992412083676968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5378449986828249987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f58a64b3ce001e4e9be4f83263c4901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterStatsHolder
+  stats:
+    baseHealth: 1
+    baseMainStat: 0
+    baseIntelligence: 0
+    baseArmor: 0

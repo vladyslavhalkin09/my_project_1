@@ -26,9 +26,15 @@ public class EnemyBase : MonoBehaviour
     private Transform[] activePatrolPoints;
     protected NavMeshAgent agent;
     bool isSlowed;
+    private CharacterStatsHolder _statsHolder;
     protected virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        _statsHolder = GetComponent<CharacterStatsHolder>();
+        if (_statsHolder != null && data != null)
+        {
+            _statsHolder.Stats.InitializeBaseStats(data.maxHp, 0f, 0f, data.enemyArmor);
+        }
     }
     protected virtual void Start()
     {

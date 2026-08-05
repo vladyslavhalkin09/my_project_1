@@ -11,7 +11,7 @@ public class Health : Resource
     public static event Action<GameObject> OnEnemyDied;
     public CharacterStatsHolder _stats;
 
-    void Start()
+    protected virtual void Start()
     {
         UpdateUi();
         _stats = GetComponent<CharacterStatsHolder>();
