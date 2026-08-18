@@ -1306,6 +1306,7 @@ GameObject:
   - component: {fileID: 461412989}
   - component: {fileID: 461412990}
   - component: {fileID: 461412991}
+  - component: {fileID: 461412992}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -1520,7 +1521,7 @@ MonoBehaviour:
   timebetweenwaves: 0.5
   attackpoint: {fileID: 516993924}
   bulletsangle: 10
-  damagePerBullet: 10
+  damageCoefficient: 1.2
 --- !u!114 &461412983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1539,11 +1540,13 @@ MonoBehaviour:
   trapZonePrefab: {fileID: 8681172549915795419, guid: 0565dd150588de548990850cfc4af175, type: 3}
   throwRange: 5
   attackpoint: {fileID: 516993924}
-  trapDamage: 10
+  trapBaseDamage: 10
   trapRadius: 20
   trapDuration: 10
   trapSlowMultiplier: 10
   traplifetimebeforeactive: 5
+  damageVariance: 0.05
+  statCoefficient: 2
 --- !u!114 &461412984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1559,8 +1562,8 @@ MonoBehaviour:
   manaCost: 5
   cooldown: 5
   hasHitFirstEnemy: 0
-  PowerShotDamage: 50
-  BaseDamage: 10
+  maxCoefficient: 0
+  minCoefficient: 0
   PowerShotCastTime: 0
   ArrowPrefab: {fileID: 4508762365249515241, guid: 10863e856f1fcbe489e4be2a8fcf7444, type: 3}
   MaxChargeTime: 1
@@ -1674,9 +1677,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterStatsHolder
   stats:
     baseHealth: 50
-    baseMainStat: 20
-    baseIntelligence: 50
-    baseArmor: 1
+    baseMainStat: 0
+    baseIntelligence: 20
+    baseArmor: 0
 --- !u!114 &461412991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1689,6 +1692,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db8d84cd8a0df984c80e2d13ccd57ac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponDamageCalculator
+--- !u!114 &461412992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461412972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f6d37d844a8bde47b5500b1d6aa340e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpellDamageCalculator
 --- !u!1 &480682547
 GameObject:
   m_ObjectHideFlags: 0

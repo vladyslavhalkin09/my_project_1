@@ -10,7 +10,7 @@ public class BaseAbility : MonoBehaviour
     protected bool isoncooldown;
     [SerializeField] protected float cooldown = 5f;
 
-    void Awake()
+    protected virtual void Awake()
     {
         _mana = GetComponent<Mana>();
     }

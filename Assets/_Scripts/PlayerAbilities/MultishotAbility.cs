@@ -12,9 +12,15 @@ public class MultishotAbility : BaseAbility
     public float timebetweenwaves;
     public Transform attackpoint;
     public float bulletsangle;
-    public float damagePerBullet;
     public event Action<float, string> OnCastChanged;
     public event Action OnCastFinished;
+    public float damageCoefficient = 1.2f;
+    private WeaponDamageCalculator _calculator;
+    protected override void Awake()
+    {
+        base.Awake();
+        _calculator = GetComponent<WeaponDamageCalculator>();
+    }
 
     public void TryUseMultishot(Vector3 targetPoint)
     {
@@ -47,7 +53,7 @@ public class MultishotAbility : BaseAbility
                 {
                     bulletScript.bullethitpoint = attackpoint.position + rotatedDirection * distanceToPoint;
                     bulletScript.maxDistance = distanceToPoint;
-                    bulletScript.bulletdamage = damagePerBullet;
+                    bulletScript.bulletdamage = _calculator.GetAbilityDamageMult(damageCoefficient);
                 }
             }
             float elapsed = 0f;
