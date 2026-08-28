@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class Lever : MonoBehaviour, IInteractable
+public class EquipmentPickup : MonoBehaviour, IInteractable
 {
-    public bool isLeverOn;
-    public Door targetDoor;
+    public ItemData data;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -15,30 +15,29 @@ public class Lever : MonoBehaviour, IInteractable
             }
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             Player player = other.GetComponent<Player>();
-            if (player != null)
+            if (player != null && player._nearbyInteractable == (IInteractable)this)
             {
                 player._nearbyInteractable = null;
             }
         }
     }
-    public void UseLever()
-    {
-        if (isLeverOn) return;
-        isLeverOn = true;
-        targetDoor.OpenDoor();
-
-    }
-    public void Interact(Player player)
-    {
-        UseLever();
-    }
     public string GetInteractionPrompt()
     {
-        return "Use Lever";
+        return $"Pick up {data.ItemName}";
+    }
+
+    public void Interact(Player player)
+    {
+        if (player._inventory.AddItem(data))
+        {
+            player._nearbyInteractable = null;
+            Destroy(gameObject);
+        }
     }
 }

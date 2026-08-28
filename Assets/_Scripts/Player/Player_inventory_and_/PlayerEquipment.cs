@@ -18,6 +18,11 @@ public class PlayerEquipment : MonoBehaviour
     {
         _stats = GetComponent<CharacterStatsHolder>();
     }
+    public ItemData GetEquippedItem(EquipmentSlot slot)
+    {
+        equippedItems.TryGetValue(slot, out ItemData item);
+        return item;
+    }
     public ItemData Equip(ItemData item)
     {
         ItemData previousItem = null;

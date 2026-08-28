@@ -135,6 +135,14 @@ public class PlayerInventory : MonoBehaviour
         isInventoryopen = !isInventoryopen;
         OnInventoryToggled?.Invoke(isInventoryopen);
     }
+    public void RemoveItem(ItemData item)
+    {
+        if (items.Remove(item))
+        {
+            UpdateInventoryUI();
+            OnInventoryChanged?.Invoke();
+        }
+    }
     public List<ItemData> GetItems() => items;
     public bool HasKey()
     {

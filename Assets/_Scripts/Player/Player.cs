@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
         Vector3 lookTarget = new Vector3(finalPoint.x, transform.position.y, finalPoint.z);
         transform.LookAt(lookTarget);
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !_inventory.isInventoryopen)
         {
             if (Vector3.Distance(transform.position, hit.point) <= maxRange)
             {

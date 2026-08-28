@@ -149,13 +149,13 @@
 /* ── Inventory ── */
 .inventory-container {
     position: absolute;
-    width: 300px;
+    width: 320px;
     background-color: rgba(0, 0, 0, 0.85);
     border-radius: 8px;
     padding: 10px;
     display: none;
-    top: 50%;
-    left: 50%;
+    top: 20px;
+    right: 20px;
     border-width: 1px;
     border-color: rgba(255, 255, 255, 0.15);
 }
@@ -184,4 +184,52 @@
 
 .inventory-slot-filled {
     background-color: rgba(100, 150, 255, 0.4);
+}
+/* ── Equipment Slots ── */
+.equip-slots-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+.equip-slot {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    border-width: 1px;
+    border-radius: 4px;
+    margin: 3px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.equip-slot-filled {
+    background-color: rgba(255, 180, 60, 0.4);
+}
+
+.equip-slot-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 9px;
+    -unity-text-align: lower-center;
+}
+/* ── Interaction Prompt ── */
+.interaction-prompt {
+    position: absolute;
+    bottom: 160px;
+    left: 50%;
+    translate: -50% 0%;
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 6px;
+    padding: 6px 14px;
+    display: none;
+}
+
+.interaction-prompt-label {
+    color: white;
+    font-size: 14px;
 }

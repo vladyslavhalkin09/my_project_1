@@ -31,6 +31,10 @@ public class Chest : MonoBehaviour, IInteractable
 
         }
     }
+    public string GetInteractionPrompt()
+    {
+        return "Open Chest";
+    }
 
     public void OpenChest()
     {

@@ -23,6 +23,16 @@ public class GameHUD : MonoBehaviour
     private PlayerInventory _inventory;
     private VisualElement _inventoryContainer;
     private VisualElement _inventoryGrid;
+    private PlayerEquipment _equipment;
+    private VisualElement equip_slot_weapon;
+    private VisualElement equip_slot_helmet;
+    private VisualElement equip_slot_amulet;
+    private VisualElement equip_slot_chest;
+    private VisualElement equip_slot_boots;
+    private VisualElement equip_slot_ring;
+    private VisualElement interaction_prompt;
+    private Label interaction_prompt_label;
+    private IInteractable _lastInteractable;
 
 
 
@@ -36,6 +46,14 @@ public class GameHUD : MonoBehaviour
         _inventoryGrid = _uidoc.rootVisualElement.Q<VisualElement>("inventory-grid");
         _inventory.OnInventoryChanged += UpdateInventoryUI;
         _inventory.OnInventoryToggled += HandleInventoryToggle;
+        _equipment = player.GetComponent<PlayerEquipment>();
+        equip_slot_weapon = _uidoc.rootVisualElement.Q<VisualElement>("equip-slot-weapon");
+        equip_slot_helmet = _uidoc.rootVisualElement.Q<VisualElement>("equip-slot-helmet");
+        equip_slot_amulet = _uidoc.rootVisualElement.Q<VisualElement>("equip-slot-amulet");
+        equip_slot_chest = _uidoc.rootVisualElement.Q<VisualElement>("equip-slot-chest");
+        equip_slot_boots = _uidoc.rootVisualElement.Q<VisualElement>("equip-slot-boots");
+        equip_slot_ring = _uidoc.rootVisualElement.Q<VisualElement>("equip-slot-ring");
+        _equipment.OnEquipmentChanged += HandleEquipmentChanged;
         _health.OnResourceChanged += UpdateHPBar;
         _mana.OnResourceChanged += UpdateManaBar;
         hp_bar_fill = _uidoc.rootVisualElement.Q<VisualElement>("hp-bar-fill");
@@ -62,7 +80,25 @@ public class GameHUD : MonoBehaviour
         ability_3_overlay.style.display = DisplayStyle.None;
         ability_4_overlay.style.display = DisplayStyle.None;
         Debug.Log($"Overlay 1 display: {ability_1_overlay.style.display.value}");
+        interaction_prompt = _uidoc.rootVisualElement.Q<VisualElement>("interaction-prompt");
+        interaction_prompt_label = _uidoc.rootVisualElement.Q<Label>("interaction-prompt-label");
 
+    }
+    void Update()
+    {
+        if (player._nearbyInteractable != _lastInteractable)
+        {
+            _lastInteractable = player._nearbyInteractable;
+            if (_lastInteractable != null)
+            {
+                interaction_prompt.style.display = DisplayStyle.Flex;
+                interaction_prompt_label.text = $"[F] {_lastInteractable.GetInteractionPrompt()}";
+            }
+            else
+            {
+                interaction_prompt.style.display = DisplayStyle.None;
+            }
+        }
     }
     void UpdateAbility1(float progress)
     {
@@ -146,6 +182,7 @@ public class GameHUD : MonoBehaviour
         player._powershot.OnCastFinished -= HideCastbar;
         _inventory.OnInventoryChanged -= UpdateInventoryUI;
         _inventory.OnInventoryToggled -= HandleInventoryToggle;
+        _equipment.OnEquipmentChanged -= HandleEquipmentChanged;
     }
     void UpdateInventoryUI()
     {
@@ -156,6 +193,18 @@ public class GameHUD : MonoBehaviour
             slot.AddToClassList("inventory-slot");
             slot.AddToClassList("inventory-slot-filled");
             slot.tooltip = item.ItemName;
+            if (item.isEquppable)
+            {
+                slot.RegisterCallback<ClickEvent>(evt =>
+                {
+                    ItemData previousItem = _equipment.Equip(item);
+                    _inventory.RemoveItem(item);
+                    if (previousItem != null)
+                    {
+                        _inventory.AddItem(previousItem);
+                    }
+                });
+            }
             _inventoryGrid.Add(slot);
         }
         int emptySlots = _inventory.SlotsAmount - _inventory.GetItems().Count;
@@ -170,7 +219,39 @@ public class GameHUD : MonoBehaviour
     void HandleInventoryToggle(bool isOpen)
     {
         _inventoryContainer.style.display = isOpen ? DisplayStyle.Flex : DisplayStyle.None;
-        if (isOpen) UpdateInventoryUI();
+        if (isOpen)
+        {
+            UpdateInventoryUI();
+            UpdateEquipSlotsUI();
+        }
+    }
+    void HandleEquipmentChanged(EquipmentSlot slot)
+    {
+        UpdateEquipSlotsUI();
     }
 
+    void UpdateEquipSlotsUI()
+    {
+        UpdateEquipSlot(equip_slot_weapon, EquipmentSlot.Weapon);
+        UpdateEquipSlot(equip_slot_helmet, EquipmentSlot.Helmet);
+        UpdateEquipSlot(equip_slot_amulet, EquipmentSlot.Amulet);
+        UpdateEquipSlot(equip_slot_chest, EquipmentSlot.Chest);
+        UpdateEquipSlot(equip_slot_boots, EquipmentSlot.Boots);
+        UpdateEquipSlot(equip_slot_ring, EquipmentSlot.Ring);
+    }
+
+    void UpdateEquipSlot(VisualElement slotElement, EquipmentSlot slot)
+    {
+        ItemData item = _equipment.GetEquippedItem(slot);
+        if (item != null)
+        {
+            slotElement.AddToClassList("equip-slot-filled");
+            slotElement.tooltip = item.ItemName;
+        }
+        else
+        {
+            slotElement.RemoveFromClassList("equip-slot-filled");
+            slotElement.tooltip = "";
+        }
+    }
 }

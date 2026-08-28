@@ -2,5 +2,10 @@ using UnityEngine;
 
 public enum EquipmentSlot
 {
-    Weapon
+    Weapon,
+    Helmet,
+    Amulet,
+    Chest,
+    Boots,
+    Ring
 }

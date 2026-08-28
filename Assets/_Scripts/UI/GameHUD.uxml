@@ -3,8 +3,31 @@
     <ui:VisualElement name="root" class="root">
         <ui:VisualElement name="inventory-container" class="inventory-container">
             <ui:Label text="Inventory" class="inventory-title"/>
+            <ui:VisualElement name="equip-slots-container" class="equip-slots-container">
+    <ui:VisualElement name="equip-slot-weapon" class="equip-slot">
+        <ui:Label text="Weapon" class="equip-slot-label"/>
+    </ui:VisualElement>
+    <ui:VisualElement name="equip-slot-helmet" class="equip-slot">
+        <ui:Label text="Helmet" class="equip-slot-label"/>
+    </ui:VisualElement>
+    <ui:VisualElement name="equip-slot-amulet" class="equip-slot">
+        <ui:Label text="Amulet" class="equip-slot-label"/>
+    </ui:VisualElement>
+    <ui:VisualElement name="equip-slot-chest" class="equip-slot">
+        <ui:Label text="Chest" class="equip-slot-label"/>
+    </ui:VisualElement>
+    <ui:VisualElement name="equip-slot-boots" class="equip-slot">
+        <ui:Label text="Boots" class="equip-slot-label"/>
+    </ui:VisualElement>
+    <ui:VisualElement name="equip-slot-ring" class="equip-slot">
+        <ui:Label text="Ring" class="equip-slot-label"/>
+    </ui:VisualElement>
+</ui:VisualElement>
             <ui:VisualElement name="inventory-grid" class="inventory-grid"/>
         </ui:VisualElement>
+        <ui:VisualElement name="interaction-prompt" class="interaction-prompt">
+    <ui:Label name="interaction-prompt-label" text="" class="interaction-prompt-label"/>
+</ui:VisualElement>
         <ui:VisualElement name="bottom-panel" class="bottom-panel">
             <ui:VisualElement name="cast-bar-container" class="cast-bar-container">
                 <ui:VisualElement name="cast-bar-fill" class="cast-bar-fill"/>

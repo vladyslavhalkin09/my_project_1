@@ -30,6 +30,10 @@ public class Door : MonoBehaviour, IInteractable
             }
         }
     }
+    public string GetInteractionPrompt()
+    {
+        return "Open Door";
+    }
     public void OpenDoor()
     {
         if (isDoorOpen) return;

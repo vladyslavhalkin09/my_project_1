@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea6517fea0a74b348911700015d85b2c, type: 3}
   m_Name: TestWpn1
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  ItemName: 
+  ItemName: WeaponTest1
   isUsable: 0
-  isEquppable: 0
+  isEquppable: 1
   slot: 0
   statModifiers:
   - affectedStat: 1
