@@ -11,8 +11,11 @@ public class SpellDamageCalculator : MonoBehaviour
 
     public float GetSpellDamage(float baseDamage, float statCoefficient, float variancePercent = 0f)
     {
-        float baseResult = baseDamage + _stats.Stats.GetStat(StatType.MainStat) * statCoefficient;
+        float mainStatValue = _stats.Stats.GetStat(StatType.MainStat);
+        float baseResult = baseDamage + mainStatValue * statCoefficient;
         float variance = Random.Range(-variancePercent, variancePercent);
-        return baseResult * (1f + variance);
+        float result = baseResult * (1f + variance);
+        Debug.Log($"[SpellDmg] MainStat={mainStatValue}, base={baseDamage}, coeff={statCoefficient}, variance%={variancePercent}, result={result}");
+        return result;
     }
 }

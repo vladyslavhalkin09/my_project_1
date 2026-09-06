@@ -62,5 +62,9 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
+        <ui:VisualElement name="item-tooltip" class="item-tooltip">
+            <ui:Label name="item-tooltip-name" class="item-tooltip-name"/>
+            <ui:Label name="item-tooltip-stats" class="item-tooltip-stats"/>
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

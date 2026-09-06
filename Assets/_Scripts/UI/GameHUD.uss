@@ -217,6 +217,37 @@
     font-size: 9px;
     -unity-text-align: lower-center;
 }
+
+.item-icon {
+    width: 100%;
+    flex-grow: 1;
+    -unity-background-scale-mode: scale-to-fit;
+}
+/* ── Item Tooltip ── */
+.item-tooltip {
+    position: absolute;
+    display: none;
+    background-color: rgba(20, 20, 25, 0.95);
+    border-color: rgba(255, 255, 255, 0.4);
+    border-width: 1px;
+    border-radius: 4px;
+    padding: 8px 10px;
+    max-width: 220px;
+}
+
+.item-tooltip-name {
+    color: white;
+    font-size: 14px;
+    -unity-font-style: bold;
+    white-space: normal;
+}
+
+.item-tooltip-stats {
+    color: rgba(180, 220, 255, 0.9);
+    font-size: 11px;
+    white-space: normal;
+    margin-top: 2px;
+}
 /* ── Interaction Prompt ── */
 .interaction-prompt {
     position: absolute;

@@ -33,6 +33,9 @@ public class GameHUD : MonoBehaviour
     private VisualElement interaction_prompt;
     private Label interaction_prompt_label;
     private IInteractable _lastInteractable;
+    private VisualElement item_tooltip;
+    private Label item_tooltip_name;
+    private Label item_tooltip_stats;
 
 
 
@@ -54,6 +57,15 @@ public class GameHUD : MonoBehaviour
         equip_slot_boots = _uidoc.rootVisualElement.Q<VisualElement>("equip-slot-boots");
         equip_slot_ring = _uidoc.rootVisualElement.Q<VisualElement>("equip-slot-ring");
         _equipment.OnEquipmentChanged += HandleEquipmentChanged;
+        item_tooltip = _uidoc.rootVisualElement.Q<VisualElement>("item-tooltip");
+        item_tooltip_name = _uidoc.rootVisualElement.Q<Label>("item-tooltip-name");
+        item_tooltip_stats = _uidoc.rootVisualElement.Q<Label>("item-tooltip-stats");
+        RegisterEquipSlotTooltip(equip_slot_weapon, EquipmentSlot.Weapon);
+        RegisterEquipSlotTooltip(equip_slot_helmet, EquipmentSlot.Helmet);
+        RegisterEquipSlotTooltip(equip_slot_amulet, EquipmentSlot.Amulet);
+        RegisterEquipSlotTooltip(equip_slot_chest, EquipmentSlot.Chest);
+        RegisterEquipSlotTooltip(equip_slot_boots, EquipmentSlot.Boots);
+        RegisterEquipSlotTooltip(equip_slot_ring, EquipmentSlot.Ring);
         _health.OnResourceChanged += UpdateHPBar;
         _mana.OnResourceChanged += UpdateManaBar;
         hp_bar_fill = _uidoc.rootVisualElement.Q<VisualElement>("hp-bar-fill");
@@ -192,7 +204,8 @@ public class GameHUD : MonoBehaviour
             VisualElement slot = new VisualElement();
             slot.AddToClassList("inventory-slot");
             slot.AddToClassList("inventory-slot-filled");
-            slot.tooltip = item.ItemName;
+            AddItemIcon(slot, item);
+            RegisterTooltip(slot, item);
             if (item.isEquppable)
             {
                 slot.RegisterCallback<ClickEvent>(evt =>
@@ -224,6 +237,10 @@ public class GameHUD : MonoBehaviour
             UpdateInventoryUI();
             UpdateEquipSlotsUI();
         }
+        else
+        {
+            HideItemTooltip();
+        }
     }
     void HandleEquipmentChanged(EquipmentSlot slot)
     {
@@ -242,16 +259,93 @@ public class GameHUD : MonoBehaviour
 
     void UpdateEquipSlot(VisualElement slotElement, EquipmentSlot slot)
     {
+        VisualElement existingIcon = slotElement.Q<VisualElement>(className: "item-icon");
+        if (existingIcon != null) slotElement.Remove(existingIcon);
+
         ItemData item = _equipment.GetEquippedItem(slot);
         if (item != null)
         {
             slotElement.AddToClassList("equip-slot-filled");
-            slotElement.tooltip = item.ItemName;
+            AddItemIcon(slotElement, item);
         }
         else
         {
             slotElement.RemoveFromClassList("equip-slot-filled");
-            slotElement.tooltip = "";
         }
+    }
+
+    // Equip slots are persistent elements reused across updates (never recreated),
+    // so their hover handlers are registered ONCE in Start() and always look up the
+    // CURRENT item live via _equipment.GetEquippedItem(slot) — never capture the item
+    // itself at registration time, or re-equipping would stack duplicate handlers.
+    void RegisterEquipSlotTooltip(VisualElement slotElement, EquipmentSlot slot)
+    {
+        slotElement.RegisterCallback<PointerEnterEvent>(evt =>
+        {
+            ItemData item = _equipment.GetEquippedItem(slot);
+            if (item != null) ShowItemTooltip(item, evt.position);
+        });
+        slotElement.RegisterCallback<PointerMoveEvent>(evt =>
+        {
+            if (_equipment.GetEquippedItem(slot) != null) PositionTooltip(evt.position);
+        });
+        slotElement.RegisterCallback<PointerLeaveEvent>(evt => HideItemTooltip());
+    }
+
+    void AddItemIcon(VisualElement slot, ItemData item)
+    {
+        if (item.icon == null) return;
+        VisualElement icon = new VisualElement();
+        icon.AddToClassList("item-icon");
+        icon.style.backgroundImage = new StyleBackground(item.icon);
+        icon.pickingMode = PickingMode.Ignore;
+        slot.Insert(0, icon);
+    }
+
+    // Inventory slots are fully recreated on every UpdateInventoryUI (via _inventoryGrid.Clear()),
+    // so a fresh closure per slot here is safe — the old VisualElements and their handlers are discarded.
+    void RegisterTooltip(VisualElement slot, ItemData item)
+    {
+        slot.RegisterCallback<PointerEnterEvent>(evt => ShowItemTooltip(item, evt.position));
+        slot.RegisterCallback<PointerMoveEvent>(evt => PositionTooltip(evt.position));
+        slot.RegisterCallback<PointerLeaveEvent>(evt => HideItemTooltip());
+    }
+
+    void ShowItemTooltip(ItemData item, Vector2 pointerPosition)
+    {
+        item_tooltip_name.text = item.ItemName;
+        item_tooltip_stats.text = BuildStatsText(item);
+        item_tooltip.style.display = DisplayStyle.Flex;
+        PositionTooltip(pointerPosition);
+    }
+
+    void PositionTooltip(Vector2 pointerPosition)
+    {
+        Vector2 local = _uidoc.rootVisualElement.WorldToLocal(pointerPosition);
+        item_tooltip.style.left = local.x + 16;
+        item_tooltip.style.top = local.y + 16;
+    }
+
+    void HideItemTooltip()
+    {
+        item_tooltip.style.display = DisplayStyle.None;
+    }
+
+    string BuildStatsText(ItemData item)
+    {
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        if (item is WeaponData weapon)
+        {
+            sb.AppendLine($"Damage: {weapon.minDamage:0} - {weapon.maxDamage:0}");
+        }
+        if (item.statModifiers != null)
+        {
+            foreach (StatModifier mod in item.statModifiers)
+            {
+                string sign = mod.Value >= 0 ? "+" : "";
+                sb.AppendLine($"{mod.AffectedStat}: {sign}{mod.Value:0.#}");
+            }
+        }
+        return sb.ToString().TrimEnd();
     }
 }

@@ -9,4 +9,5 @@ public class ItemData : ScriptableObject
     public bool isEquppable;
     public EquipmentSlot slot;
     public List<StatModifier> statModifiers;
+    public Sprite icon;
 }

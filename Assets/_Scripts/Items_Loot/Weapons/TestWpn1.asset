@@ -21,6 +21,7 @@ MonoBehaviour:
     value: 5
   - affectedStat: 0
     value: 5
+  icon: {fileID: 21300000, guid: 5837a5dc2f5632e41974bedca0ff0815, type: 3}
   minDamage: 3
   maxDamage: 6
   statsMultiplier: 1

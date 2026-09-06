@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41eceeb3f04d99d4cab347eba43f32b4, type: 3}
+  m_Name: Armor_chest_common
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  ItemName: Chest_1
+  isUsable: 0
+  isEquppable: 1
+  slot: 3
+  statModifiers:
+  - affectedStat: 0
+    value: 10
+  icon: {fileID: 21300000, guid: d2c17e3e2556cdf44a604e20f43fbc3f, type: 3}

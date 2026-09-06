@@ -10,6 +10,7 @@ public class Chest : MonoBehaviour, IInteractable
 
     private void OnTriggerEnter(Collider other)
     {
+        if (ischestopen) return;
         if (other.CompareTag("Player"))
         {
             Player player = other.GetComponent<Player>();
@@ -50,5 +51,9 @@ public class Chest : MonoBehaviour, IInteractable
     public void Interact(Player player)
     {
         OpenChest();
+        if (player._nearbyInteractable == (IInteractable)this)
+        {
+            player._nearbyInteractable = null;
+        }
     }
 }
