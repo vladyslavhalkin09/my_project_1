@@ -212,6 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameHUD
   player: {fileID: 461412973}
+  itemPickupPrefab: {fileID: 2998301655117028253, guid: c4487d577f124da489b087997f6df47c, type: 3}
 --- !u!114 &64957820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -796,7 +797,7 @@ PrefabInstance:
     - target: {fileID: 8889542911077932186, guid: 2bda3c273c281574da4200f746e227cd, type: 3}
       propertyPath: drops.Array.data[0].prefab
       value: 
-      objectReference: {fileID: 165798609986852611, guid: 93a226e9a952fdd4f8afb2c051f3fc75, type: 3}
+      objectReference: {fileID: 5441882545019592262, guid: 1fc4b4559ea860a4d8c1d8f29bda439e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7738,7 +7739,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Chest
   ischestopen: 0
   drops:
-  - {fileID: 182185255494668612, guid: fdb4ee2c8f46c2349817c3c9af6813a0, type: 3}
+  - {fileID: 4035460796947429212, guid: f03d7f27c94ac8a4ca05b9de1923c024, type: 3}
   spawnitemradius: 2
 --- !u!65 &1735846405
 BoxCollider:
@@ -9258,7 +9259,7 @@ PrefabInstance:
     - target: {fileID: 8889542911077932186, guid: 2bda3c273c281574da4200f746e227cd, type: 3}
       propertyPath: drops.Array.data[0].prefab
       value: 
-      objectReference: {fileID: 7150266854847198757, guid: bebdf30ba4dd7e64e80bebc0c70c19a5, type: 3}
+      objectReference: {fileID: 8125979886988354049, guid: f5cd17acbb6b00b47a19e3ca70d453d7, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

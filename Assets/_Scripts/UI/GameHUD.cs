@@ -36,6 +36,7 @@ public class GameHUD : MonoBehaviour
     private VisualElement item_tooltip;
     private Label item_tooltip_name;
     private Label item_tooltip_stats;
+    [SerializeField] private GameObject itemPickupPrefab;
 
 
 
@@ -206,6 +207,16 @@ public class GameHUD : MonoBehaviour
             slot.AddToClassList("inventory-slot-filled");
             AddItemIcon(slot, item);
             RegisterTooltip(slot, item);
+
+            slot.RegisterCallback<PointerDownEvent>(evt =>
+      {
+          if (evt.button == 1)
+          {
+              DropItem(item);
+              evt.StopPropagation();
+          }
+      });
+
             if (item.isEquppable)
             {
                 slot.RegisterCallback<ClickEvent>(evt =>
@@ -228,6 +239,18 @@ public class GameHUD : MonoBehaviour
             _inventoryGrid.Add(slot);
         }
     }
+    void DropItem(ItemData item)
+    {
+        _inventory.RemoveItem(item);
+
+        if (itemPickupPrefab != null)
+        {
+            Vector3 dropPos = player.transform.position + player.transform.forward * 1.5f;
+            GameObject dropped = Instantiate(itemPickupPrefab, dropPos, Quaternion.identity);
+            EquipmentPickup pickup = dropped.GetComponent<EquipmentPickup>();
+            if (pickup != null) pickup.data = item;
+        }
+    }
 
     void HandleInventoryToggle(bool isOpen)
     {
@@ -245,6 +268,20 @@ public class GameHUD : MonoBehaviour
     void HandleEquipmentChanged(EquipmentSlot slot)
     {
         UpdateEquipSlotsUI();
+    }
+    void TryUnequip(EquipmentSlot slot)
+    {
+        ItemData item = _equipment.GetEquippedItem(slot);
+        if (item == null) return;
+
+        if (_inventory.AddItem(item))
+        {
+            _equipment.Unequip(slot);
+        }
+        else
+        {
+            Debug.Log("Inventory is full, cannot unequip");
+        }
     }
 
     void UpdateEquipSlotsUI()
@@ -290,6 +327,8 @@ public class GameHUD : MonoBehaviour
             if (_equipment.GetEquippedItem(slot) != null) PositionTooltip(evt.position);
         });
         slotElement.RegisterCallback<PointerLeaveEvent>(evt => HideItemTooltip());
+
+        slotElement.RegisterCallback<ClickEvent>(evt => TryUnequip(slot));
     }
 
     void AddItemIcon(VisualElement slot, ItemData item)

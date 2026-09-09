@@ -3,6 +3,26 @@ using UnityEngine;
 public class EquipmentPickup : MonoBehaviour, IInteractable
 {
     public ItemData data;
+    [SerializeField] private SpriteRenderer iconRenderer;
+
+    private void Start()
+    {
+        RefreshIcon();
+    }
+
+    public void SetData(ItemData newData)
+    {
+        data = newData;
+        RefreshIcon();
+    }
+
+    private void RefreshIcon()
+    {
+        if (iconRenderer != null && data != null)
+        {
+            iconRenderer.sprite = data.icon;
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
