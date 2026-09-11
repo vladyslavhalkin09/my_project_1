@@ -27,10 +27,12 @@ public class EnemyBase : MonoBehaviour
     protected NavMeshAgent agent;
     bool isSlowed;
     private CharacterStatsHolder _statsHolder;
+    protected EnemyStatsHolder _enemyStatsHolder;
     protected virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         _statsHolder = GetComponent<CharacterStatsHolder>();
+        _enemyStatsHolder = GetComponent<EnemyStatsHolder>();
         if (_statsHolder != null && data != null)
         {
             _statsHolder.Stats.InitializeBaseStats(data.maxHp, 0f, data.mainStat, data.enemyArmor);

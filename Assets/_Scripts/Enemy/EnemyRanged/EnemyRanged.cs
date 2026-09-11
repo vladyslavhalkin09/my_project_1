@@ -6,12 +6,11 @@ public class EnemyRanged : EnemyBase
     public GameObject EnemyBulletprefab;
     public Transform enemyAttackpoint;
     private EnemyRangedData RangedData => data as EnemyRangedData;
-    private EnemyStatsHolder _statsHolder;
+
 
     protected override void Awake()
     {
         base.Awake();
-        _statsHolder = GetComponent<EnemyStatsHolder>();
     }
     protected override void Start()
     {
@@ -44,7 +43,7 @@ public class EnemyRanged : EnemyBase
             EnemyBulllet bullletscript = bullet.GetComponent<EnemyBulllet>();
             if (bullletscript != null)
             {
-                bullletscript.enemybulletdamage = _statsHolder != null ? _statsHolder.GetAttackDamage() : RangedData.minDamage;
+                bullletscript.enemybulletdamage = _enemyStatsHolder != null ? _enemyStatsHolder.GetAttackDamage() : RangedData.minDamage;
                 bullletscript.enemybulletlifetime = RangedData.projectileLifeTime;
                 bullletscript.enemybulletspeed = RangedData.projectileSpeed;
                 bullletscript.Initialize();
