@@ -15,8 +15,12 @@ MonoBehaviour:
   maxHp: 100
   enemyspeed: 3
   patrolSpeed: 2
+  enemyArmor: 0
+  mainStat: 0
+  minDamage: 15
+  maxDamage: 20
+  statMultiplier: 0
   enemyTimeBetweenShots: 3
   attackRange: 10
-  damageAmount: 30
   projectileSpeed: 12
   projectileLifeTime: 1.5

@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 7551430661831711153}
   - component: {fileID: -1628038406145845445}
   - component: {fileID: 6992432558935917945}
+  - component: {fileID: 2902236042160025101}
   m_Layer: 3
   m_Name: Enemy
   m_TagString: Enemy
@@ -331,6 +332,18 @@ MonoBehaviour:
     baseMainStat: 0
     baseIntelligence: 0
     baseArmor: 0
+--- !u!114 &2902236042160025101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480269625173837204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d9daa33ce27fd64eab075f1dae2692e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStatsHolder
 --- !u!1 &4214391089673042315
 GameObject:
   m_ObjectHideFlags: 0

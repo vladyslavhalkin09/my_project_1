@@ -4,6 +4,12 @@ public class EnemyMelee : EnemyBase
 {
     public float nextAttackTime;
     private EnemyMeleeData MeleeData => data as EnemyMeleeData;
+    private EnemyStatsHolder _statsHolder;
+    protected override void Awake()
+    {
+        base.Awake();
+        _statsHolder = GetComponent<EnemyStatsHolder>();
+    }
     protected override void Start()
     {
         base.Start();
@@ -31,7 +37,8 @@ public class EnemyMelee : EnemyBase
             Health playerHP = player.GetComponent<Health>();
             if (playerHP != null)
             {
-                playerHP.TakeDamage(MeleeData.damageAmount);
+                float dmg = _statsHolder != null ? _statsHolder.GetAttackDamage() : MeleeData.minDamage;
+                playerHP.TakeDamage(dmg);
                 Debug.Log("Вдарив гравця! Залишилось HP: " + playerHP.currentValue);
                 nextAttackTime = Time.time + MeleeData.attackRate;
             }

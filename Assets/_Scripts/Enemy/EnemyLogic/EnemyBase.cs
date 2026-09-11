@@ -33,7 +33,7 @@ public class EnemyBase : MonoBehaviour
         _statsHolder = GetComponent<CharacterStatsHolder>();
         if (_statsHolder != null && data != null)
         {
-            _statsHolder.Stats.InitializeBaseStats(data.maxHp, 0f, 0f, data.enemyArmor);
+            _statsHolder.Stats.InitializeBaseStats(data.maxHp, 0f, data.mainStat, data.enemyArmor);
         }
     }
     protected virtual void Start()

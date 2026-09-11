@@ -20,3 +20,4 @@ MonoBehaviour:
   - affectedStat: 3
     value: 2
   icon: {fileID: 21300000, guid: f81d6fadb0c7c284486216ab8b39da23, type: 3}
+  rarity: 0

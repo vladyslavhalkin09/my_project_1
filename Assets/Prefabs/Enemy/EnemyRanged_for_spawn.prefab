@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -7271669580855978726}
   - component: {fileID: 7044668974161855661}
   - component: {fileID: -3698483125588969055}
+  - component: {fileID: 2385733683918752887}
   m_Layer: 3
   m_Name: EnemyRanged_for_spawn
   m_TagString: Enemy
@@ -228,6 +229,18 @@ MonoBehaviour:
     baseMainStat: 0
     baseIntelligence: 0
     baseArmor: 0
+--- !u!114 &2385733683918752887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2462955875839380269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d9daa33ce27fd64eab075f1dae2692e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStatsHolder
 --- !u!1 &2743309810607387532
 GameObject:
   m_ObjectHideFlags: 0

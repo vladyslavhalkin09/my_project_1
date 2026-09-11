@@ -15,6 +15,10 @@ MonoBehaviour:
   maxHp: 100
   enemyspeed: 4
   patrolSpeed: 2
+  enemyArmor: 2
+  mainStat: 0
+  minDamage: 10
+  maxDamage: 15
+  statMultiplier: 0
   attackDistance: 1.2
-  damageAmount: 10
   attackRate: 1

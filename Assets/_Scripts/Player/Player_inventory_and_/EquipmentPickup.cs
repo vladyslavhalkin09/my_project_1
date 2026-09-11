@@ -4,23 +4,30 @@ public class EquipmentPickup : MonoBehaviour, IInteractable
 {
     public ItemData data;
     [SerializeField] private SpriteRenderer iconRenderer;
+    [SerializeField] private LootBeam lootBeam; // перетягни дочірній Beam сюди в інспекторі
 
     private void Start()
     {
-        RefreshIcon();
+        RefreshVisuals();
     }
 
     public void SetData(ItemData newData)
     {
         data = newData;
-        RefreshIcon();
+        RefreshVisuals();
     }
 
-    private void RefreshIcon()
+    private void RefreshVisuals()
     {
-        if (iconRenderer != null && data != null)
+        if (data == null) return;
+
+        if (iconRenderer != null)
         {
             iconRenderer.sprite = data.icon;
+        }
+        if (lootBeam != null)
+        {
+            lootBeam.ApplyRarity(data.rarity);
         }
     }
 
