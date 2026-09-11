@@ -7,10 +7,10 @@ public class EnemyHealthBar : MonoBehaviour
     public Slider slider;
     public Health health;
     private Camera cam;
-    void Start()
-    {
-        slider.value = health.currentValue / health.maxValue;
-    }
+    // void Start()
+    // {
+    //     slider.value = health.currentValue / health.maxValue;
+    // }
     void Awake()
     {
         health = GetComponentInParent<Health>();

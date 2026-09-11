@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "my_project_1.slnx"
+    "dotnet.defaultSolution": "3d_3preson_.slnx"
 }
