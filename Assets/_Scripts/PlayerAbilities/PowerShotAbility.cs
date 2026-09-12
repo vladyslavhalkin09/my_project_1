@@ -31,12 +31,20 @@ public class PowerShotAbility : BaseAbility
         float damage = _calculator.GetAbilityDamageMult(coefficient);
         ChargeTime = 0f;
         OnCastFinished?.Invoke();
+        Vector3 direction = (targetPoint - attackpoint.position).normalized;
+        direction.y = 0;
+        direction = direction.normalized;
+        float travelDistance = range;
+        if (Physics.Linecast(attackpoint.position, attackpoint.position + direction * range, out RaycastHit wallHit, obstacleLayer))
+        {
+            travelDistance = wallHit.distance;
+        }
         GameObject newPowerShotArrow = Instantiate(ArrowPrefab, attackpoint.position, attackpoint.rotation);
         PowerShotArrow PSScript = newPowerShotArrow.GetComponent<PowerShotArrow>();
         if (PSScript != null)
         {
             PSScript.ArrowHitpoint = targetPoint;
-            PSScript.maxDistance = range;
+            PSScript.maxDistance = travelDistance;
             PSScript.PowerShotArrowDamage = damage;
         }
         StartCoroutine(CooldownBase());

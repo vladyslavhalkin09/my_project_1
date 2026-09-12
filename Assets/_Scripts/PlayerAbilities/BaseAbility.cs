@@ -9,10 +9,13 @@ public class BaseAbility : MonoBehaviour
     protected Mana _mana;
     protected bool isoncooldown;
     [SerializeField] protected float cooldown = 5f;
+    protected LayerMask obstacleLayer;
 
     protected virtual void Awake()
     {
         _mana = GetComponent<Mana>();
+        AutoAttack autoAttack = GetComponent<AutoAttack>();
+        if (autoAttack != null) obstacleLayer = autoAttack.obstacleLayer;
     }
     protected IEnumerator CooldownBase()
     {

@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
         if (_cam == null) _cam = Camera.main;
         Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
         Vector3 finalPoint;
-        LayerMask aimMask = groundLayer | enemyLayer;
+        LayerMask aimMask = groundLayer | enemyLayer | _autoAttack.obstacleLayer;
         bool hitSomething = Physics.Raycast(ray, out RaycastHit hit, 100f, aimMask);
         bool hitGround = hitSomething && (((1 << hit.collider.gameObject.layer) & groundLayer.value) != 0);
 

@@ -1651,7 +1651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 042d3990c10195c43b3f5efeee81a821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MultishotAbility
-  manaCost: 20
+  manaCost: 5
   cooldown: 5
   bulletsamount: 5
   wavesamount: 3
@@ -1659,6 +1659,7 @@ MonoBehaviour:
   timebetweenwaves: 0.5
   attackpoint: {fileID: 516993924}
   bulletsangle: 10
+  range: 15
   damageCoefficient: 1.2
 --- !u!114 &461412983
 MonoBehaviour:
@@ -1707,6 +1708,7 @@ MonoBehaviour:
   MaxChargeTime: 1
   ChargeTime: 0
   attackpoint: {fileID: 516993924}
+  range: 20
 --- !u!54 &461412985
 Rigidbody:
   m_ObjectHideFlags: 0
