@@ -12,6 +12,8 @@ public class MultishotAbility : BaseAbility
     public float timebetweenwaves;
     public Transform attackpoint;
     public float bulletsangle;
+    [Tooltip("Fixed distance the wave travels, independent of click distance — like Drow Ranger's Multishot. Later this can be scaled by the equipped weapon.")]
+    public float range = 10f;
     public event Action<float, string> OnCastChanged;
     public event Action OnCastFinished;
     public float damageCoefficient = 1.2f;
@@ -39,7 +41,6 @@ public class MultishotAbility : BaseAbility
         {
             float halfangle = bulletsangle / 2;
             float angleStep = bulletsangle / (bulletsamount - 1);
-            float distanceToPoint = Vector3.Distance(attackpoint.position, targetPoint);
             Vector3 direction = (targetPoint - attackpoint.position).normalized;
             for (int bullet = 0; bullet < bulletsamount; bullet++)
             {
@@ -51,8 +52,8 @@ public class MultishotAbility : BaseAbility
 
                 if (bulletScript != null)
                 {
-                    bulletScript.bullethitpoint = attackpoint.position + rotatedDirection * distanceToPoint;
-                    bulletScript.maxDistance = distanceToPoint;
+                    bulletScript.bullethitpoint = attackpoint.position + rotatedDirection * range;
+                    bulletScript.maxDistance = range;
                     bulletScript.bulletdamage = _calculator.GetAbilityDamageMult(damageCoefficient);
                 }
             }

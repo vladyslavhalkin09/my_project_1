@@ -8,6 +8,7 @@ public class PowerShotArrow : MonoBehaviour
     private Vector3 ArrowDirection;
     private Vector3 ArrowSpawnPosition;
     public float PowerShotArrowSpeed;
+    public float maxDistance;
 
     void Start()
     {
@@ -15,12 +16,15 @@ public class PowerShotArrow : MonoBehaviour
         ArrowDirection = (ArrowHitpoint - ArrowSpawnPosition).normalized;
         ArrowDirection.y = 0;
         ArrowDirection = ArrowDirection.normalized;
-        Destroy(gameObject, 2f);
     }
     void Update()
     {
         transform.Translate(ArrowDirection * PowerShotArrowSpeed * Time.deltaTime, Space.World);
-
+        float travelDistance = Vector3.Distance(ArrowSpawnPosition, transform.position);
+        if (maxDistance <= travelDistance)
+        {
+            Destroy(gameObject);
+        }
     }
     private void OnTriggerEnter(Collider other)
     {

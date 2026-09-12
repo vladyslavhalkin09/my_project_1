@@ -1,4 +1,3 @@
-
 using System;
 using UnityEngine;
 
@@ -13,6 +12,8 @@ public class PowerShotAbility : BaseAbility
     public float MaxChargeTime = 3f;
     public float ChargeTime;
     public Transform attackpoint;
+    [Tooltip("Fixed travel distance, independent of click distance — like Windranger's Powershot. Should exceed the base attack's maxRange (currently 15).")]
+    public float range = 20f;
     public event Action<float, string> OnCastChanged;
     public event Action OnCastFinished;
     private WeaponDamageCalculator _calculator;
@@ -35,6 +36,7 @@ public class PowerShotAbility : BaseAbility
         if (PSScript != null)
         {
             PSScript.ArrowHitpoint = targetPoint;
+            PSScript.maxDistance = range;
             PSScript.PowerShotArrowDamage = damage;
         }
         StartCoroutine(CooldownBase());
@@ -55,4 +57,3 @@ public class PowerShotAbility : BaseAbility
 
     }
 }
-
