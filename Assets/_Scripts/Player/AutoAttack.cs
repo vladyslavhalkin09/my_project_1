@@ -7,7 +7,8 @@ public class AutoAttack : MonoBehaviour
     public Transform attackPoint;
     public IAttackModifier[] _modifiers;
     private float _cooldownTimer;
-    public LayerMask groundLayer;
+    [Tooltip("Layer used for line-of-sight blocking (walls/obstacles). Set this to your Obstacle layer.")]
+    public LayerMask obstacleLayer;
     private CharacterStatsHolder _stats;
     private PlayerEquipment _equipment;
     private WeaponDamageCalculator _calculator;
@@ -34,7 +35,7 @@ public class AutoAttack : MonoBehaviour
     {
 
         float distanceToPoint = Vector3.Distance(attackPoint.position, targetPoint);
-        if (Physics.Linecast(attackPoint.position, targetPoint, out RaycastHit wallHit, groundLayer))
+        if (Physics.Linecast(attackPoint.position, targetPoint, out RaycastHit wallHit, obstacleLayer))
         {
             targetPoint = wallHit.point;
             distanceToPoint = wallHit.distance;

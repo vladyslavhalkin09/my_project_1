@@ -1463,7 +1463,10 @@ MonoBehaviour:
   playerName: Hero
   groundLayer:
     serializedVersion: 2
-    m_Bits: 584
+    m_Bits: 64
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 8
   bulletprefab: {fileID: 2811433392301329690, guid: 5d15d0988992c384984f76721c05d8c1, type: 3}
   attackpoint: {fileID: 516993924}
   cam: {fileID: 1364674963}
@@ -1479,6 +1482,7 @@ MonoBehaviour:
   _autoAttack: {fileID: 0}
   movespeed: 5
   crosshairSmoothSpeed: 15
+  turnSpeed: 720
 --- !u!136 &461412975
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1780,9 +1784,9 @@ MonoBehaviour:
   baseCooldown: 2
   bulletPrefab: {fileID: 2811433392301329690, guid: 5d15d0988992c384984f76721c05d8c1, type: 3}
   attackPoint: {fileID: 516993924}
-  groundLayer:
+  obstacleLayer:
     serializedVersion: 2
-    m_Bits: 584
+    m_Bits: 512
 --- !u!114 &461412989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6127,7 +6131,7 @@ GameObject:
   - component: {fileID: 1312353675}
   - component: {fileID: 1312353674}
   - component: {fileID: 1312353673}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Dummy
   m_TagString: Enemy
   m_Icon: {fileID: 0}

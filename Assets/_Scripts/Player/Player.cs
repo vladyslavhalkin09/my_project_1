@@ -5,6 +5,8 @@ public class Player : MonoBehaviour
 {
     public string playerName = "test";
     public LayerMask groundLayer;
+    [Tooltip("Assign your Enemy layer here so the aim ray stops on enemies instead of passing through them to the ground behind.")]
+    public LayerMask enemyLayer;
     public GameObject bulletprefab;
     public Transform attackpoint;
     public Transform cam;
@@ -27,7 +29,10 @@ public class Player : MonoBehaviour
     private Vector3 _direction;
     private float _verticalVelocity;
     public float crosshairSmoothSpeed = 15f;
+    public float turnSpeed = 720f; // degrees per second, character facing rotation
     private Vector3 _targetCrosshairPos;
+    private Camera _cam;
+    private MeshRenderer _crosshairRenderer;
     void Awake()
     {
         _health = GetComponent<Health>();
@@ -39,6 +44,8 @@ public class Player : MonoBehaviour
         _powershot = GetComponent<PowerShotAbility>();
         _dash = GetComponent<DashAbility>();
         _autoAttack = GetComponent<AutoAttack>();
+        _cam = Camera.main;
+        if (crosshairObject != null) _crosshairRenderer = crosshairObject.GetComponent<MeshRenderer>();
         Debug.Log($"Ready {playerName}");
     }
     void FixedUpdate()
@@ -62,9 +69,12 @@ public class Player : MonoBehaviour
     void Update()
     {
         if (IsDead()) return;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (_cam == null) _cam = Camera.main;
+        Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
         Vector3 finalPoint;
-        bool hitSomething = Physics.Raycast(ray, out RaycastHit hit, 100f, groundLayer);
+        LayerMask aimMask = groundLayer | enemyLayer;
+        bool hitSomething = Physics.Raycast(ray, out RaycastHit hit, 100f, aimMask);
+        bool hitGround = hitSomething && (((1 << hit.collider.gameObject.layer) & groundLayer.value) != 0);
 
         if (hitSomething)
         {
@@ -82,30 +92,39 @@ public class Player : MonoBehaviour
                 finalPoint = transform.position + transform.forward * 5f;
             }
         }
+        bool withinRange = Vector3.Distance(transform.position, finalPoint) <= maxRange;
         if (crosshairObject != null)
         {
-
             crosshairObject.position = Vector3.Lerp(crosshairObject.position, finalPoint, Time.deltaTime * 20f);
 
-            if (hitSomething)
+            if (hitGround)
             {
-                crosshairObject.rotation = Quaternion.LookRotation(hit.normal);
+                // keep it lying flat on the surface, tilted to match the normal,
+                // instead of standing the crosshair up along the normal
+                crosshairObject.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal) * Quaternion.Euler(90, 0, 0);
             }
             else
             {
                 crosshairObject.rotation = Quaternion.Euler(90, 0, 0);
             }
-            float dist = Vector3.Distance(transform.position, finalPoint);
-            crosshairObject.GetComponent<MeshRenderer>().material.color = (dist <= maxRange) ? Color.blue : Color.grey;
+            if (_crosshairRenderer != null)
+            {
+                _crosshairRenderer.material.color = withinRange ? Color.blue : Color.grey;
+            }
         }
         Vector3 lookTarget = new Vector3(finalPoint.x, transform.position.y, finalPoint.z);
-        transform.LookAt(lookTarget);
+        Vector3 lookDir = lookTarget - transform.position;
+        if (lookDir.sqrMagnitude > 0.0001f)
+        {
+            Quaternion desiredRotation = Quaternion.LookRotation(lookDir);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, desiredRotation, turnSpeed * Time.deltaTime);
+        }
 
         if (Input.GetMouseButtonDown(0) && !_inventory.isInventoryopen)
         {
-            if (Vector3.Distance(transform.position, hit.point) <= maxRange)
+            if (withinRange)
             {
-                _autoAttack.TryShot(hit.point);
+                _autoAttack.TryShot(finalPoint);
             }
         }
         float moveX = Input.GetAxisRaw("Horizontal");
